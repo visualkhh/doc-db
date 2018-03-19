@@ -1,0 +1,36 @@
+-- LOCK 걸린 오브젝트 검색
+SELECT  DO.OBJECT_NAME
+      , DO.OWNER
+      , DO.OBJECT_TYPE
+      , DO.OWNER
+      , VO.XIDUSN
+      , VO.SESSION_ID
+      , VO.LOCKED_MODE
+FROM    V$LOCKED_OBJECT VO
+      , DBA_OBJECTS     DO
+WHERE   VO.OBJECT_ID = DO.OBJECT_ID
+;
+
+
+
+
+
+
+-- SID 와 SERIAL 검색
+SELECT  A.SID
+   ,    A.SERIAL#
+FROM    V$SESSION   A
+     ,  V$LOCK      B
+     ,  DBA_OBJECTS C
+WHERE   A.SID           =   B.SID
+AND     B.ID1           =   C.OBJECT_ID
+AND     B.TYPE          =   'TM'
+AND     C.OBJECT_NAME   =   'T_OFFICE_MENU'
+;
+
+262   29796
+;
+
+
+
+ALTER SYSTEM KILL SESSION '262, 29796';
