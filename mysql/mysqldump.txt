@@ -1,0 +1,4 @@
+
+/usr/local/mysql/bin/mysqldump -h119.206.205.176 --column-statistics=0 -ugenome -p genome > DBSchem111a.sql
+
+
